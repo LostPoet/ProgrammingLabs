@@ -3,6 +3,7 @@
 
 #define STORAGE 1270784
 #define SLEN 100
+#define WLEN 128
 #define HLEN 701819
 
 struct {
@@ -56,5 +57,5 @@ struct pattern {
 };
 
 struct word {
-    char str[128];
+    char str[WLEN];
 };
