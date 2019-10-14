@@ -11,13 +11,12 @@ int main() {
     int taller = 0;
 
     // load patterns and build AVL tree
-    int length = 0;
     while (bupt_getline(pi->str, pf)) {
         InsertAVL(&t, pi->str, &taller);
-        ++length;
         ++pi;
     }
 
+    // search words in BBST
     int i; 
     struct word *pw = (struct word *)malloc(sizeof(struct word));
     clock_t timer = clock();
