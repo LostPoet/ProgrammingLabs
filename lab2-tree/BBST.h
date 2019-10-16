@@ -1,26 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include "public.h"
 
 // 平衡因子
 #define LH +1
 #define EH  0
 #define RH -1
-
-int string_cmp(const void *src1, const void *src2) {
-    const unsigned char *s1 = (const unsigned char *)src1;
-    const unsigned char *s2 = (const unsigned char *)src2;
-    while (('\0' != *s1) || ('\0' != *s2)) {
-        if (*s1 < *s2)
-            return -1;
-        else if (*s1 > *s2)
-            return 1;
-        s1++;
-        s2++;
-    }
-    return 0;
-}
 
 typedef struct BBSTNode {
 	char *data;

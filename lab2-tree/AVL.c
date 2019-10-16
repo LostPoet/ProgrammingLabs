@@ -17,7 +17,6 @@ int main() {
     }
 
     // search words in BBST
-    int i; 
     struct word *pw = (struct word *)malloc(sizeof(struct word));
     clock_t timer = clock();
     while (bupt_getline(pw->str, wf)) {

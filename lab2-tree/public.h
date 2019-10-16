@@ -39,6 +39,20 @@ int bupt_cmp(const void *src1, const void *src2) {
     return 0;
 }
 
+int string_cmp(const void *src1, const void *src2) {
+    const unsigned char *s1 = (const unsigned char *)src1;
+    const unsigned char *s2 = (const unsigned char *)src2;
+    while (('\0' != *s1) || ('\0' != *s2)) {
+        if (*s1 < *s2)
+            return -1;
+        else if (*s1 > *s2)
+            return 1;
+        s1++;
+        s2++;
+    }
+    return 0;
+}
+
 int bupt_getline(char *s, FILE *stream) {
     char *p = s;
     while((*p=getc(stream))!=EOF && *p++!='\n')
