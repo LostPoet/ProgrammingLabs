@@ -21,6 +21,11 @@ void* bupt_malloc(size_t size) {
     return malloc(size);
 }
 
+int bupt_memalign(void **memptr, size_t alignment, size_t size) {
+    global_stats.mem += size;
+    return posix_memalign(memptr, alignment, size);
+}
+
 int bupt_cmp(const void *src1, const void *src2) {
     const unsigned char *s1 = (const unsigned char *)src1;
     const unsigned char *s2 = (const unsigned char *)src2;
