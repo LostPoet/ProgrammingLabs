@@ -162,9 +162,10 @@ int InsertAVL(BBSTree *BBST, char *string, int *taller) {
 }
 
 BBSTree SearchAVL(const BBSTree BBST, const char *word) {
-	if (!BBST || (bupt_cmp(word, BBST->data) == 0))
+	global_stats.cmpnum++;
+	if (!BBST || (string_cmp(word, BBST->data) == 0))
 		return BBST;
-	else if (bupt_cmp(word, BBST->data) > 0)
+	else if (string_cmp(word, BBST->data) > 0)
 		return SearchAVL(BBST->lchild, word);
 	else
 		return SearchAVL(BBST->rchild, word);

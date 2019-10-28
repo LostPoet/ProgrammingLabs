@@ -1,4 +1,4 @@
-#include "BBST.h"
+#include "AVL.h"
 #include <time.h>
 
 int main() {

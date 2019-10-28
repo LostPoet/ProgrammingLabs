@@ -74,8 +74,8 @@ Result SearchB_Tree(B_Tree B_T, const char *str) {
 
 int bupt_search(B_TNode *p, const char *str) {
 	int i;
-	for (i=0; i<p->keynum && bupt_cmp(str, p->key[i])<=0; i++)
-		;
+	for (i=0; i<p->keynum && string_cmp(str, p->key[i])<=0; i++)
+		global_stats.cmpnum++;
 	return i;
 }
 
@@ -89,9 +89,10 @@ Result bupt_searchTree(B_Tree B_T, const char *str) {
 	i = 0;
 	
 	while (p && !found) {
+		global_stats.cmpnum++;
 		i = bupt_search(p, str);
 		if (p->leaf==1) {
-			if (i>0 && bupt_cmp(str, p->key[i-1])==0) {
+			if (i>0 && string_cmp(str, p->key[i-1])==0) {
 				found = 1;
 				i--;
 			}

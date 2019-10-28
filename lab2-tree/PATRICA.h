@@ -16,7 +16,7 @@ typedef struct {
     void *root;
 } tree;
 
-// *u isn't in *t --> return 0
+// u isn't in t --> return 0
 // else --> return none-zero
 int contains(tree *t, const char *u) {
     const uint8 *ubytes = (uint8 *)u;
@@ -26,16 +26,15 @@ int contains(tree *t, const char *u) {
     if (!p)
         return 0;
     while (1 & (long)p) {
+        global_stats.cmpnum++;
         node *q = (node*)(p-1);
         uint8 c = 0;
         if (q->byte < ulen) 
             c = ubytes[q->byte];
-        else if (q->byte > ulen)
-            printf("QQQQQQQQQQQQQQQQQQ\n");
         const int direction = (1+(q->otherbits|c)) >> 8;
         p = (uint8*) q->child[direction];
     }
-    return 0 == bupt_cmp(u, (const char*)p);
+    return 0 == string_cmp(u, (const char*)p);
 }
 
 // no more space --> 0
