@@ -47,7 +47,7 @@ int insert(tree *t, const char *u) {
 
     if (!p) {
         char *x;
-        int a = bupt_memalign((void **)&x, sizeof(void *), ulen + 1);
+        int a = posix_memalign((void **)&x, sizeof(void *), ulen + 1);
         if (a)
             return 0;
         memcpy(x, u, ulen +1);
@@ -89,7 +89,7 @@ int insert(tree *t, const char *u) {
     if (bupt_memalign((void **) &newnode, sizeof(void *), sizeof(node)))
         return 0;
     char *x;
-    if (bupt_memalign((void **) &x, sizeof(void *), ulen + 1)) {
+    if (posix_memalign((void **) &x, sizeof(void *), ulen + 1)) {
         free(newnode);
         return 0;
     }
