@@ -25,20 +25,13 @@ unsigned int APHash(const char* str, unsigned int len)
 
 ENTRY *hashtable[HASH_LENGTH] = {0};
 
-void swap(void *ap, void *bp, int size) {
-    void *temp;
-    temp = malloc(size);
-    memcpy(temp,ap,size);
-    memcpy(ap,bp,size);
-    memcpy(bp,temp,size);
-    free(temp);
-}
-
 // keep the order according to value
-void put(char *s) {
+// return 1 --> new key
+// return 0 --> already exist
+int put(char *s) {
     int pos = APHash(s, strlen(s)) % HASH_LENGTH;
     ENTRY *ep = hashtable[pos];
-    while (ep && string_cmp(ep->key, s))
+    while (ep && (ep->key != s))
         ep = ep->next;
     if (!ep) {
         ENTRY *new_entry = (ENTRY *)malloc(sizeof(ENTRY));
@@ -54,6 +47,7 @@ void put(char *s) {
             new_entry = tail->next;
             tail->next = new_entry;
         }
+        return 1;
     } else {
         ep->value++;
         ENTRY *pre = hashtable[pos];
@@ -78,6 +72,7 @@ void put(char *s) {
             pre->next = ep;
         }
     }
+    return 0;
 }
 
 void merge(ENTRY **ea, ENTRY **eb) {

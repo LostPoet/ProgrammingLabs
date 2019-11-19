@@ -38,7 +38,7 @@ NODE* ac_goto(NODE *current_node, char c) {
 int no_such_string(const NODE *current_node, const char *string) {
     PATTERN *p;
     for (p = current_node->matchlist; p; p = p->next)
-        if (!string_cmp(p->s, string))
+        if (p->s == string)
             return 0;
     return 1;
 }
@@ -169,6 +169,7 @@ void set_fs(NODE *start) {
             enqueue(Q, e->p);
         }
     }
+    clear_queue(Q);
 }
 
 PATTERN* processing(NODE **current_state, char direction) {

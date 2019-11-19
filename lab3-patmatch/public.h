@@ -6,7 +6,10 @@
 
 #define PATTERN_MAX 65          // max length of line
 #define PATTERN_LINES 1281237   // distinct lines
-#define PATTERN_SIZE 18087743   // characters inside pattern.txt
+#define PATTERN_SIZE 18087744   // characters inside pattern.txt
+#define BF_KMP_PATTERN_MAX 23
+#define BF_KMP_PATTERN_SIZE 13265 // characters inside pattern_bf_kmp.txt
+#define BF_KMP_PATTERN_LINES 1500
 #define STRING_SIZE 919943484   // characters inside string.txt
 
 struct {
@@ -58,6 +61,7 @@ int string_cmp(const void *src1, const void *src2) {
     return 0;
 }
 
+// A fatal error will occur if FILE dosn't have a carriage return in the end
 int bupt_getline(char *s, FILE *stream) {
     char *p = s;
     while((*p=getc(stream))!=EOF && *p++!='\n')
