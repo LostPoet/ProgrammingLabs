@@ -53,7 +53,7 @@ int main() {
         }
     }
     clock_t end = clock();
-    printf("Distinct patterns in result: %d", count);
+    printf("Distinct patterns in result: %d\n", count);
     printf("hash size: %d\n", hash_size());
 
     printf("Task finishes\n");
@@ -61,7 +61,7 @@ int main() {
     int stride = 1;
     int group = HASH_LENGTH;
     while (group != 1) {
-        group = ceil(group / 2);
+        group = ceil(group / 2.0);
         for (int i = 0; i < group; ++i) {
             if (i * 2 * stride + stride < HASH_LENGTH)
                 merge(hashtable + i * 2 * stride, hashtable + i * 2 * stride + stride);

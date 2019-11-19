@@ -44,7 +44,7 @@ int put(char *s) {
             new_entry->next = hashtable[pos];
             hashtable[pos] = new_entry;
         } else {
-            new_entry = tail->next;
+            new_entry->next = tail->next;
             tail->next = new_entry;
         }
         return 1;

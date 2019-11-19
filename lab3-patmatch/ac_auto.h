@@ -38,7 +38,7 @@ NODE* ac_goto(NODE *current_node, char c) {
 int no_such_string(const NODE *current_node, const char *string) {
     PATTERN *p;
     for (p = current_node->matchlist; p; p = p->next)
-        if (p->s == string)
+        if (!strcmp(p->s, string))
             return 0;
     return 1;
 }
@@ -175,6 +175,7 @@ void set_fs(NODE *start) {
 PATTERN* processing(NODE **current_state, char direction) {
     NODE *destiny;
     NODE *state = *current_state;
+    global_stats.cmpnum++;
     while (!(destiny = ac_goto(state, direction))) {
         state = state->fs;
         global_stats.cmpnum++;
