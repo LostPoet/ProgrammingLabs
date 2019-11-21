@@ -12,3 +12,8 @@
 
 1. 名称的对应关系:平衡树--AVL, B+树--BPlusTree, Trie树--Trie, 4路Radix树--RadixTree, PATRICA--PATRICA
 2. 这里PATRICA的实现参考了[crit-bit tree](https://github.com/agl/critbit), 可以实现内部节点存储的最大优化
+
+## lab3-patmatch
+
+1. 注意PWD需要在目录lab3-patmatch之下
+2. pattern.txt和pattern_bf_kmp.txt末尾需要加一个换行符(上传版本已含)
