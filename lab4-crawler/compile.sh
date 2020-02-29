@@ -1,1 +1,1 @@
-gcc bcrawler.c csapp.c -o bcrawler -lpthread -lpcre
+gcc bcrawler.c csapp.c -o ./bin/bcrawler -lpthread -lpcre -levent

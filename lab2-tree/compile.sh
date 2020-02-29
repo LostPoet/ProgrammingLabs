@@ -1,5 +1,5 @@
-gcc AVL.c -o AVL
-gcc BPlusTree.c -o BPlusTree
-gcc PATRICA.c -o PATRICA
-gcc RadixTree.c -o RadixTree
-gcc Trie.c -o Trie
+BINARYPATH=./bin
+for C_SOURECE in ./*.c
+do
+    gcc $C_SOURECE -o $BINARYPATH/${C_SOURECE%.c}
+done

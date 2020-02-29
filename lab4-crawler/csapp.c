@@ -975,6 +975,8 @@ int open_clientfd(char *hostname, char *port) {
         } 
     } 
 
+    //evutil_make_socket_nonblocking(clientfd);
+
     /* Clean up */
     freeaddrinfo(listp);
     if (!p) /* All connects failed */

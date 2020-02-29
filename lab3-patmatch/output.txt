@@ -1,0 +1,11 @@
+Start matching:|>>>>>>>>>>|
+Total searching time(with I/O): 7630s
+Start matching:|>>>>>>>>>>|
+Total searching time(with I/O): 4687s
+Start matching:|>>>>>>>>>>|
+Total searching time(with I/O): 4799s
+
+kmp三次差别
+2758329663K 总比较次数
+1399730777K 修改首字符的两次统计为一次统计后
+1399370902K 使用nextval数组后

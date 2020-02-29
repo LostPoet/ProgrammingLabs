@@ -1,4 +1,5 @@
 */.vscode/
 *.pdf
 *.zip
-string.txt
+*.txt
+bin/

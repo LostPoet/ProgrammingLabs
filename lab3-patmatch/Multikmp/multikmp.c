@@ -3,6 +3,8 @@
 #include <time.h>
 
 typedef struct {
+    int length;
+    int next[BF_KMP_PATTERN_MAX];
     char *p;
     int count;
 } PATTERN;
@@ -19,7 +21,10 @@ void get_next(char *t, int *next) {
         if (j == -1 || t[i] == t[j]) {
             i++;
             j++;
-            next[i] = j;
+            if (t[i] != t[j])
+                next[i] = j;
+            else
+                next[i] = next[j];
         } else
             j = next[j];
     }
@@ -41,8 +46,15 @@ int main() {
         patterns[index++].p = pp;
         pp += length;
     }
-
     fclose(pf);
+
+    // construct next array
+    for (int i = 0; i < BF_KMP_PATTERN_LINES; ++i) {
+        patterns[i].length = strlen(patterns[i].p);
+        get_next(patterns[i].p, patterns[i].next);
+    }
+    printf("next array complete!\n");
+    
     char *string_storage = (char *)bupt_malloc(STRING_SIZE);
     char *sp = string_storage;
     while ((*sp++ = fgetc(sf)) != EOF)
@@ -51,7 +63,7 @@ int main() {
     printf("Start matching:|");
     fflush(stdout);
     // match the string
-    int next[PATTERN_MAX];
+//    int next[PATTERN_MAX];
     sp = string_storage; // hold there
     int l1 = strlen(sp); // also hold there
     int timer = 0;
@@ -59,23 +71,26 @@ int main() {
     for (int i = 0; i < BF_KMP_PATTERN_LINES; i++) {
         timer++;
         pp = patterns[i].p;
-        get_next(patterns[i].p, next);
-        int l2 = strlen(patterns[i].p);
+        int l2 = patterns[i].length;
         int k = 0,
             v = 0;
         while (k < l1) {
             global_stats.cmpnum++;
-            if (v >= l2) {
+            if (v == l2) {
                 patterns[i].count++;
                 k -= (l2-1);
                 v = 0;
-                continue;
             }
-            if (v == -1 || sp[k] == pp[v]) {
+            if (sp[k] == pp[v]) {
                 ++k;
                 ++v;
-            } else
-                v = next[v];
+            } else {
+                v = patterns[i].next[v];
+                if (v == -1) {
+                    ++k;
+                    ++v;
+                }
+            }
         }
         if (v == l2)
             patterns[i].count++;
