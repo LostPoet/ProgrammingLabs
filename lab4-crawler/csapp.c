@@ -68,7 +68,7 @@ void dns_error(char *msg) /* Obsolete gethostbyname error */
 
 /* $begin forkwrapper */
 pid_t Fork(void) 
-{
+{   
     pid_t pid;
 
     if ((pid = fork()) < 0)
